@@ -39,7 +39,7 @@
 
 
         @include('partials.about')
-        @include('partials.testimonials')
+        {{-- @include('partials.testimonials') --}}
         @include('partials.contact-form')
     </main>
 

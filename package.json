@@ -1,10 +1,20 @@
 {
     "$schema": "https://json.schemastore.org/package.json",
+    "name": "e-dev",
+    "version": "1.0.0",
+    "description": "E-DEV Laravel application with Vite and TailwindCSS",
     "private": true,
     "type": "module",
+    "main": "vite.config.js",
+    "directories": {
+        "test": "tests"
+    },
     "scripts": {
+        "dev": "vite",
         "build": "vite build",
-        "dev": "vite"
+        "preview": "vite preview",
+        "vercel-build": "npm run build",
+        "postinstall": "php artisan config:cache --no-ansi && php artisan route:cache --no-ansi && php artisan view:cache --no-ansi || true"
     },
     "devDependencies": {
         "@tailwindcss/postcss": "^4.1.11",
@@ -17,14 +27,16 @@
         "tailwindcss": "^4.1.11",
         "vite": "^7.0.4"
     },
-    "name": "e-dev",
-    "version": "1.0.0",
-    "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\" alt=\"Laravel Logo\"></a></p>",
-    "main": "vite.config.js",
-    "directories": {
-        "test": "tests"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC"
+    "keywords": [
+        "laravel",
+        "vite",
+        "tailwindcss",
+        "php"
+    ],
+    "author": "Nantenaina Hervé",
+    "license": "ISC",
+    "engines": {
+        "node": ">=18.0.0",
+        "npm": ">=8.0.0"
+    }
 }
