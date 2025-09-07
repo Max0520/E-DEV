@@ -1,15 +1,10 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "public/index.php",
-      "use": "vercel-php@0.6.0"
-    },
-    {
-      "src": "package.json",
-      "use": "@vercel/node"
+  "functions": {
+    "public/index.php": {
+      "runtime": "vercel-php@0.6.0"
     }
-  ],
+  },
   "routes": [
     {
       "src": "/(.*)",
@@ -20,10 +15,5 @@
     "APP_ENV": "production",
     "APP_DEBUG": "false",
     "LOG_CHANNEL": "stderr"
-  },
-  "functions": {
-    "public/index.php": {
-      "runtime": "vercel-php@0.6.0"
-    }
   }
 }
