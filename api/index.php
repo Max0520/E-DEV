@@ -1,11 +1,20 @@
 <?php
 
-// Create necessary directories for Laravel on Vercel
+use Illuminate\Http\Request;
+
+// **1️⃣ Charger l'application Laravel**
+$app = require __DIR__ . '/../bootstrap/app.php';
+
+// **2️⃣ Redéfinir les chemins vers /tmp pour Vercel**
+// Laravel va stocker les fichiers temporaires ici (cache, sessions, logs)
+$app->useStoragePath('/tmp/storage');
+$app->useCachedPackagesPath('/tmp/bootstrap/cache/packages.php');
+$app->useCachedConfigPath('/tmp/bootstrap/cache/config.php');
+$app->useCachedRoutesPath('/tmp/bootstrap/cache/routes.php');
+
+// **3️⃣ S'assurer que les répertoires nécessaires existent**
 $dirs = [
-    '/tmp/bootstrap',
     '/tmp/bootstrap/cache',
-    '/tmp/storage',
-    '/tmp/storage/framework',
     '/tmp/storage/framework/cache',
     '/tmp/storage/framework/sessions',
     '/tmp/storage/framework/views',
@@ -18,9 +27,8 @@ foreach ($dirs as $dir) {
     }
 }
 
-// Set environment variables for Laravel paths
-$_ENV['BOOTSTRAP_CACHE_PATH'] = '/tmp/bootstrap/cache';
-$_ENV['APP_STORAGE_PATH'] = '/tmp/storage';
-
-// Forward to Laravel
-require __DIR__ . '/../public/index.php';
+// **4️⃣ Lancer Laravel**
+$request = Request::capture();
+$response = $app->handle($request);
+$response->send();
+$app->terminate($request, $response);
